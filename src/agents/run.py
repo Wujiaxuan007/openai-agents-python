@@ -1239,7 +1239,7 @@ class AgentRunner:
                 if isinstance(item, HandoffCallItem)
             ]
             if handoff_items:
-                RunImpl.stream_step_items_to_queue(handoff_items, event_queue)
+                RunImpl.stream_step_items_to_queue(cast(list[RunItem], handoff_items), event_queue)
 
         return await RunImpl.execute_tools_and_side_effects(
             agent=agent,
