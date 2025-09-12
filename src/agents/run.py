@@ -46,7 +46,6 @@ from .guardrail import (
 from .handoffs import Handoff, HandoffInputFilter, handoff
 from .items import (
     HandoffCallItem,
-    HandoffOutputItem,
     ItemHelpers,
     ModelResponse,
     RunItem,
@@ -1109,7 +1108,7 @@ class AgentRunner:
 
         # Filter out items that have already been sent to avoid duplicates
         items_to_filter = single_step_result.new_step_items
-        
+
         if emitted_tool_call_ids:
             # Filter out tool call items that were already emitted during streaming
             items_to_filter = [
@@ -1131,7 +1130,7 @@ class AgentRunner:
             item for item in items_to_filter
             if not isinstance(item, HandoffCallItem)
         ]
-        
+
         # Create filtered result and send to queue
         filtered_result = _dc.replace(
             single_step_result, new_step_items=items_to_filter
